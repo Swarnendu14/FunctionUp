@@ -1,26 +1,46 @@
 const express = require('express');
-const { route } = require('express/lib/application');
-const app = express.Router();
+const router = express.Router();
 
-app.get('/sol1', function (req, res) {
-    let arr= [1,2,3,4,5,7];
-    let missingNumber;
-    let n=arr.length;
-    let sumOriginal=((n+1)*(n+2))/2;
-    let sumMissing=0;
-    arr.forEach(x=>sumMissing+=x);
-    missingNumber=sumOriginal-sumMissing;
-    res.send(`The Missing number is ${missingNumber}`);
-});
-app.get('/sol2', function (req, res) {
-    let arr= [33, 34, 35, 36, 38];
-    let missingNumber;
-    let n=arr.length;
-    let sumOriginal=((n+1)*(arr[0]+arr[n-1]))/2;
-    let sumMissing=0;
-    arr.forEach(x=>sumMissing+=x);
-    missingNumber=sumOriginal-sumMissing;
-    res.send(`The Missing number is ${missingNumber}`);
-});
 
-module.exports = app;
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ],
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ],
+       },
+   ]
+
+
+   router.post('/players', function (req, res) {
+    let value=players.find(x=>x.name==req.body.name);
+    if(!value)
+    {
+        players.push(req.body);
+    }
+    res.send(  { data: players , status: true }  )
+   })
+  
+module.exports = router;
