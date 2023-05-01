@@ -1,15 +1,23 @@
 const { count } = require("console")
-const BookModel= require("../models/bookModel")
-
+const bookModel= require("../models/bookModel")
+const authorModel=require('../models/authorModel')
 const createBook= async function (req, res) {
     let data= req.body
-
-    let savedData= await BookModel.create(data)
+    let savedData= await bookModel.create(data)
     res.send({msg: savedData})
 }
 
+const findBook=async (req,res)=>{
+    let obj=authorModel.findOne({author_name:"Chetan Bhagat"});
+    let id=obj[0].author_id;
+    let data=bookModel.find({author_id:id});
+    res.send({book:data});
+}
+
+
+
 const getBooksData= async function (req, res) {
-    let allBooks= await BookModel.find( {authorName : "HO" } )
+    let allBooks= await bookModel.find( {authorName : "HO" } )
     console.log(allBooks)
     if (allBooks.length > 0 )  res.send({msg: allBooks, condition: true})
     else res.send({msg: "No books found" , condition: false})
@@ -53,7 +61,4 @@ const deleteBooks= async function (req, res) {
 
 
 
-module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
-module.exports.updateBooks= updateBooks
-module.exports.deleteBooks= deleteBooks
+module.exports= {createBook,findBook};
