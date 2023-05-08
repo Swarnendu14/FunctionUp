@@ -1,15 +1,18 @@
 const express=require('express');
-const controllers=require('../controllers/logInfo')
+const controller=require('../controllers/controller')
+const mid=require('../middlewares/middleware')
 
 const router=express.Router();
 
 router.get("/test",(req,res)=>{
     res.send({msg:"Server is running"});
 })
-router.get("/user1",controllers.one);
-router.get("/user2",controllers.one);
-router.get("/user3",controllers.one);
-router.get("/user4",controllers.one);
-router.get("/example1",controllers.one);
+router.post("/createUser",mid.check,controller.createUser);
+router.post("/createProduct",controller.createProduct);
+router.post("/createOrder",mid.check,controller.createOrder);
+router.post("/purchase",mid.check,controller.purchase);
+
+
+
 
 module.exports=router;

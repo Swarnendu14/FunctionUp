@@ -1,16 +1,18 @@
 const express=require('express');
-const moment=require('moment')
+const mongoose=require('mongoose')
 const route=require('./routes/route')
 const app=express();
 
 app.use(express.json());
 
-app.use((req,res,next)=>{
-    let ip= req.ip;
-    let url= req.originalUrl;
-    console.log(`Date & Time: ${moment().format()},IP: ${ip},End Point: ${url}`)
-    next();
+mongoose.connect("mongodb+srv://swarnenduktpp:Rq0bKY4NZeTmPE0F@cluster0.qntniml.mongodb.net/middleware2", {
+    useNewUrlParser: true
 })
+.then(()=>{
+    console.log("MongoDB connected");
+})
+.catch((err)=>err.message)
+
 
 app.use("/",route);
 
