@@ -17,7 +17,7 @@ const createCard = async(req, res) => {
     try {
         let data = req.body;
         let count=await cardModel.find();
-        data["cardNumber"]=`C${count.length}`;
+        data["cardNumber"]=`C${count.length+1}`;
         let savedData = await cardModel.create(data)
         res.status(201).json({ status: true, card: savedData });
     } catch (error) {
