@@ -1,19 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const authorBook= require("../controllers/authorBook")
+const cardController = require('../controllers/cardController');
+const coustomerController = require('../controllers/coustomerController');
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
 
-router.post("/createAuthor", authorBook.createAuthor)
 
-router.post("/createBook", authorBook.createBook)
+//apis for get, delete and create coustomer
 
-router.get("/findBook",authorBook.findBook)
+router.get('/coustomer/get', coustomerController.getActiveCustomers);
+router.delete('/coustomer/delete/:customerID', coustomerController.deleteCoustomer);
+router.post('/coustomer/create', coustomerController.createCoustomer);
 
-router.get('/findAuthorUpdate',authorBook.findAuthorAndUpdate)
+router.get('/card/get', cardController.getAllCards);
 
-router.get('/findBookAuthor',authorBook.findBookAuthor)
+router.post('/card/create', cardController.createCard);
 
-module.exports = router;
+module.exports = router; 
