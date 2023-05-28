@@ -37,7 +37,7 @@ const cardSchema = new mongoose.Schema({
         required: [true, "vision is required"],
     },
     customerID: {
-        type: mongoose.Schema.Types.UUID,
+        type: String,
         ref: 'customer',
         required: [true, "customer ID is required"]
     }

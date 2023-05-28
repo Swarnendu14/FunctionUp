@@ -55,7 +55,6 @@ const coustomerSchema = new mongoose.Schema({
     },
     customerID: {
         type: String,
-        ref: 'customer',
         required: [true, "customerID is required"]
     },
 
